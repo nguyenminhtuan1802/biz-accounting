@@ -22,7 +22,31 @@ Live: https://nguyenminhtuan1802.github.io/biz-accounting/
 ## Stack
 
 Plain HTML/CSS/JavaScript modules, no build step, served by GitHub Pages.
-Storage is in `js/store.js` (browser localStorage today; Firebase Firestore next).
+Storage is in `js/store.js`: Firebase Firestore when `js/firebase-config.js` has a config,
+otherwise browser localStorage ("local mode").
+
+## Accounts and environments
+
+| Login (typed on sign-in) | Firebase email | Can use |
+|---|---|---|
+| `user@1802` | `user@1802.local` | PROD data |
+| `admin@1802` | `admin@1802.local` | PROD + TEST data, Admin page |
+
+Firestore layout: `envs/{prod|test}/{orders|purchases|entries|closings|meta}/{id}`.
+Access is enforced by `firestore.rules` on Google's servers, not by the website code.
+The Admin page can wipe TEST and re-copy it from PROD (PROD is only read).
+
+## Firebase setup (one time)
+
+1. https://console.firebase.google.com → **Add project** (Analytics not needed).
+2. **Build → Authentication → Get started → Email/Password → Enable** (leave "passwordless" off).
+3. **Authentication → Users → Add user**: `admin@1802.local` and `user@1802.local` with strong passwords.
+4. **Authentication → Settings → User actions**: untick "Enable create (sign-up)" so nobody else can register.
+5. **Build → Firestore Database → Create database** → production mode → pick a nearby region.
+6. **Firestore → Rules**: paste the contents of `firestore.rules` → **Publish**.
+7. **Project settings → General → Your apps → Web (`</>`)** → register app (no Hosting) → copy the
+   `firebaseConfig` object into `js/firebase-config.js`, commit, push.
+8. **Authentication → Settings → Authorized domains**: add `nguyenminhtuan1802.github.io`.
 
 ## Run locally
 

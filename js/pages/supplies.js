@@ -142,4 +142,5 @@ export function render(root) {
 
   resetForm();
   renderList();
+  return renderList; // re-run when data changes from another device
 }

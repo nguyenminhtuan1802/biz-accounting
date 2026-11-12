@@ -174,3 +174,27 @@ table.journal td { font-size: 13px; }
 
 [hidden] { display: none !important; }
 table.list td:first-child, table.list td:nth-child(2) { white-space: nowrap; }
+
+/* ---- header: user, environment ---- */
+.who { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.env-badge { font-weight: 700; font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--warn); color: #111; }
+body.env-test .top { border-bottom: 3px solid var(--warn); }
+body.env-test main::before {
+  content: "TEST DATA: changes here do not affect the real books";
+  display: block; text-align: center; font-weight: 600; color: #111;
+  background: var(--warn); border-radius: 8px; padding: 6px; margin-bottom: 12px;
+}
+.env-pill { font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+.env-pill.prod { background: var(--ok); color: #fff; }
+.env-pill.test { background: var(--warn); color: #111; }
+
+/* ---- login ---- */
+.card.login { max-width: 380px; margin: 48px auto; }
+
+/* ---- admin formulas ---- */
+.formulas code { font-size: 13px; background: var(--head); padding: 1px 6px; border-radius: 4px; }
+.formulas ul { padding-left: 20px; }
+.formulas li { margin: 4px 0; }
+table.rules tr.first td { border-top: 2px solid var(--line); }
+table.rules td.indent { padding-left: 28px; }
+table.rules small, .formulas small { color: var(--muted); }

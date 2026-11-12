@@ -1,0 +1,32 @@
+rules_version = '2';
+
+// Paste this into Firebase console → Firestore Database → Rules → Publish.
+// These rules are the real security: the website code is public, the rules are not bypassable.
+//
+//   user@1802  (user@1802.local)   → read/write PROD data
+//   admin@1802 (admin@1802.local)  → read/write PROD and TEST data
+//   anyone else                    → nothing
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'admin@1802.local';
+    }
+
+    function isMember() {
+      return isAdmin() || (request.auth != null && request.auth.token.email == 'user@1802.local');
+    }
+
+    function knownCollection(col) {
+      return col in ['orders', 'purchases', 'entries', 'closings', 'meta'];
+    }
+
+    match /envs/{env}/{col}/{id} {
+      allow read, write: if knownCollection(col) && (
+        (env == 'prod' && isMember()) ||
+        (env == 'test' && isAdmin())
+      );
+    }
+  }
+}

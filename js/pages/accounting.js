@@ -17,13 +17,16 @@ export function render(root) {
 
     <section class="card">
       <h2>Backup &amp; data</h2>
-      <p class="hint">Right now data is saved only in this browser. Download a backup regularly. (Shared cloud storage comes next.)</p>
+      <p class="hint">${store.mode === 'local'
+        ? 'Data is saved only in this browser (local mode). Download a backup regularly.'
+        : 'Data is saved in the cloud database. A monthly backup file is still a good habit.'}</p>
       <div class="actions wrap">
         <button class="ghost" id="export">Download backup (.json)</button>
-        <label class="ghost button">Restore from backup<input type="file" id="import" accept="application/json" hidden></label>
         <button class="ghost" id="export-csv">Download journal (.csv)</button>
+        ${store.mode === 'local' ? `
+        <label class="ghost button">Restore from backup<input type="file" id="import" accept="application/json" hidden></label>
         <button class="ghost" id="sample">Load sample data</button>
-        <button class="ghost danger" id="wipe">Erase all data</button>
+        <button class="ghost danger" id="wipe">Erase all data</button>` : ''}
         <span class="msg" id="dmsg"></span>
       </div>
     </section>`;
@@ -183,7 +186,7 @@ export function render(root) {
   root.querySelector('#export').addEventListener('click', () => {
     download(`biz-accounting-backup-${today()}.json`, JSON.stringify(store.db, null, 2));
   });
-  root.querySelector('#import').addEventListener('change', async (ev) => {
+  root.querySelector('#import')?.addEventListener('change', async (ev) => {
     const file = ev.target.files[0];
     if (!file) return;
     try {
@@ -204,19 +207,20 @@ export function render(root) {
     }
     download(`journal-${today()}.csv`, lines.join('\n'), 'text/csv');
   });
-  root.querySelector('#sample').addEventListener('click', () => {
+  root.querySelector('#sample')?.addEventListener('click', () => {
     const hasData = store.db.orders.length || store.db.purchases.length || store.db.entries.length;
     if (hasData && !confirm('This replaces your current data with sample data. Download a backup first if you need it. Continue?')) return;
     store.replaceAll(makeSample());
     location.reload();
   });
-  root.querySelector('#wipe').addEventListener('click', () => {
+  root.querySelector('#wipe')?.addEventListener('click', () => {
     if (!confirm('Erase ALL data in this browser? This cannot be undone (unless you have a backup).')) return;
     store.replaceAll({});
     location.reload();
   });
 
   draw();
+  return draw; // re-run when data changes from another device
 }
 
 function shiftDay(date, delta) {

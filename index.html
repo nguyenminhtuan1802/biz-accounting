@@ -9,12 +9,18 @@
   <body>
     <header class="top">
       <div class="brand"><span id="biz-name">3D Printing</span><small>Accounting</small></div>
-      <nav>
+      <nav hidden>
         <a href="#/orders" data-page="orders">Orders</a>
         <a href="#/supplies" data-page="supplies">Supplies</a>
         <a href="#/costs" data-page="costs">Monthly costs</a>
         <a href="#/accounting" data-page="accounting">Accounting</a>
+        <a href="#/admin" data-page="admin" hidden>Admin</a>
       </nav>
+      <div class="who">
+        <span id="env-badge" class="env-badge" hidden></span>
+        <span id="who"></span>
+        <button id="signout" class="ghost sm" hidden>Sign out</button>
+      </div>
     </header>
     <main id="main"><p class="empty">Loading…</p></main>
     <script type="module" src="js/app.js"></script>

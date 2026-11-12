@@ -1,0 +1,16 @@
+# Editor / OS cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node (in case we add a build step later)
+node_modules/
+dist/
+.env
+.env.local
+
+# Local secrets — never commit real Firebase service account keys
+firebase-service-account*.json
+*.secret.json

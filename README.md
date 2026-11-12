@@ -1,26 +1,31 @@
 # biz-accounting
 
-Accounting web app for a 3D printing business (and later, a computer retail business).
+Accounting web app for a 3D printing business (computer retail later).
+
+Live: https://nguyenminhtuan1802.github.io/biz-accounting/
+
+## Pages
+
+- **Orders**: bulk customer orders, items, discount, shipping, sales tax, payments received
+- **Supplies**: purchases (filament/resin go to inventory; equipment goes to an asset; the rest is expensed)
+- **Monthly costs**: rent, utilities, software, tax payments, owner money in/out, paying bills
+- **Accounting**: month-end checklist, materials inventory count, P&L (month + YTD), balance sheet, who owes money, journal, month close/lock, backup
+
+## How the accounting works
+
+- Double-entry, accrual basis. Source records are the truth; the journal is derived from them, so the books always balance.
+- Chart of accounts lives in `js/ledger.js`.
+- Periodic inventory: cost of materials used = start inventory + purchases − month-end count.
+- Money is stored as integer cents.
+- Closed months are locked against edits (payments for old orders can still be added in open months).
 
 ## Stack
 
-- Static frontend served from GitHub Pages
-- Firebase Firestore for shared data (customers, orders, supplies, ledger)
-- No server to run — the page is the whole app
+Plain HTML/CSS/JavaScript modules, no build step, served by GitHub Pages.
+Storage is in `js/store.js` (browser localStorage today; Firebase Firestore next).
 
-## Live
-
-https://nguyenminhtuan1802.github.io/biz-accounting/
-
-## Local
-
-Any static server works. For example:
+## Run locally
 
 ```sh
-python3 -m http.server 8000
-# then open http://localhost:8000
+python3 -m http.server 8000   # open http://localhost:8000
 ```
-
-## Status
-
-Scaffolding only. Firebase config and data model are next.

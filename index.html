@@ -4,29 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Biz Accounting</title>
-    <style>
-      :root { color-scheme: light dark; }
-      body {
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-        max-width: 640px;
-        margin: 4rem auto;
-        padding: 0 1rem;
-        line-height: 1.5;
-      }
-      h1 { margin-bottom: 0.25rem; }
-      .tag { color: #888; font-size: 0.9rem; }
-      code { background: rgba(127,127,127,0.15); padding: 0 0.3em; border-radius: 3px; }
-    </style>
+    <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
-    <h1>Biz Accounting</h1>
-    <p class="tag">3D printing &middot; Computer retail</p>
-    <p>
-      Placeholder. The real app will live here once the data backend
-      (Firebase) is wired up.
-    </p>
-    <p>
-      Repo: <a href="https://github.com/nguyenminhtuan1802/biz-accounting">github.com/nguyenminhtuan1802/biz-accounting</a>
-    </p>
+    <header class="top">
+      <div class="brand"><span id="biz-name">3D Printing</span><small>Accounting</small></div>
+      <nav>
+        <a href="#/orders" data-page="orders">Orders</a>
+        <a href="#/supplies" data-page="supplies">Supplies</a>
+        <a href="#/costs" data-page="costs">Monthly costs</a>
+        <a href="#/accounting" data-page="accounting">Accounting</a>
+      </nav>
+    </header>
+    <main id="main"><p class="empty">Loading…</p></main>
+    <script type="module" src="js/app.js"></script>
+    <noscript>This app needs JavaScript enabled.</noscript>
   </body>
 </html>

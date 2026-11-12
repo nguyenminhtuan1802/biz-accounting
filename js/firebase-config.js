@@ -8,15 +8,14 @@
 // Your apps → Web app → "SDK setup and configuration" → Config.
 // While this is null the app runs in local mode (data in this browser only).
 
-export const firebaseConfig = null;
-// export const firebaseConfig = {
-//   apiKey: '...',
-//   authDomain: '...firebaseapp.com',
-//   projectId: '...',
-//   storageBucket: '...',
-//   messagingSenderId: '...',
-//   appId: '...',
-// };
+export const firebaseConfig = {
+  apiKey: 'AIzaSyC2HzKfUTkgGNk_Tix9L6lI6edGpbwT4S4',
+  authDomain: 'd-printing-biz-db.firebaseapp.com',
+  projectId: 'd-printing-biz-db',
+  storageBucket: 'd-printing-biz-db.firebasestorage.app',
+  messagingSenderId: '149556713519',
+  appId: '1:149556713519:web:738c5431f728c366794eda',
+};
 
 // Login names typed on the sign-in screen. Firebase needs a real email shape,
 // so "admin@1802" is stored in Firebase as "admin@1802.local".

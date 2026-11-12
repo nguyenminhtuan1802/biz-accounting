@@ -65,5 +65,5 @@ export function flash(el, text, isError = false) {
   el.textContent = text;
   el.classList.toggle('error', isError);
   clearTimeout(el._t);
-  el._t = setTimeout(() => { el.textContent = ''; }, 4000);
+  if (!isError) el._t = setTimeout(() => { el.textContent = ''; }, 4000); // errors stay until the next action
 }

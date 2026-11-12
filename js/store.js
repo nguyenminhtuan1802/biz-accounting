@@ -8,10 +8,12 @@
 
 import { monthLabel, monthOf, uid } from './util.js';
 import { ADMIN_LOGINS, emailToLogin, firebaseConfig, loginToEmail } from './firebase-config.js';
+import * as appM from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js';
+import * as authM from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js';
+import * as fsM from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js';
 
 const LOCAL_KEY = 'bizacct.3dprint.v1';
 const ENV_KEY = 'bizacct.env';
-const FB = 'https://www.gstatic.com/firebasejs/10.12.2/';
 
 export const COLLECTIONS = ['orders', 'purchases', 'entries'];
 const SYNCED = [...COLLECTIONS, 'closings', 'meta'];
@@ -49,11 +51,6 @@ const isAdminUser = (u) => !!u && ADMIN_LOGINS.includes(emailToLogin(u.email));
 // ---------- Firebase wiring ----------
 
 async function initFirebase() {
-  const [appM, authM, fsM] = await Promise.all([
-    import(FB + 'firebase-app.js'),
-    import(FB + 'firebase-auth.js'),
-    import(FB + 'firebase-firestore.js'),
-  ]);
   const app = appM.initializeApp(firebaseConfig);
   auth = authM.getAuth(app);
   fs = fsM.initializeFirestore(app, {

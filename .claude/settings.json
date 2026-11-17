@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(firebase *)",
+      "Bash(npx firebase *)",
+      "Bash(gcloud *)",
+      "Bash(*firestore.googleapis.com*)",
+      "Bash(*identitytoolkit.googleapis.com*)",
+      "Bash(*securetoken.googleapis.com*)",
+      "Bash(*firebaseio.com*)",
+      "WebFetch(domain:firestore.googleapis.com)",
+      "WebFetch(domain:identitytoolkit.googleapis.com)",
+      "WebFetch(domain:securetoken.googleapis.com)"
+    ]
+  }
+}
